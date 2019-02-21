@@ -1,6 +1,5 @@
 package com.cisco.mercury.test.restapi.cloudsanity
 
-import com.cisco.mercury.test.restapi.MercRestApiSpecification
 import groovyx.net.http.*
 import spock.lang.*
 
