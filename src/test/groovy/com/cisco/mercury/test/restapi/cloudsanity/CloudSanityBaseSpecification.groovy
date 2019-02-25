@@ -13,18 +13,22 @@ class CloudSanityBaseSpecification extends CvimRestApiSpecification {
     static List<String> control_test_names = ["ping_all_controller_nodes",
                                               "check_rabbitmq_is_running",
                                               "check_rabbitmq_cluster_status",
+                                              "check_rabbitmq_cluster_size",
                                               "check_nova_service_list",
                                               "container_version_check",
                                               "ping_internal_vip",
+                                              "ping_all_cephosd_nodes",
                                               "disk_maintenance_raid_health",
                                               "check_mariadb_cluster_size",
-                                              "disk_maintenance_vd_health"]
+                                              "disk_maintenance_vd_health",
+                                              "percent_used_on_var_check"]
 
     static List<String> compute_test_names = ["check_nova_hypervisor_list",
                                               "disk_maintenance_raid_health",
                                               "container_version_check",
                                               "ping_all_compute_nodes",
-                                              "disk_maintenance_vd_health"]
+                                              "disk_maintenance_vd_health",
+                                              "percent_used_on_var_check"]
 
     static List<String> cephmon_test_names = ["check_cephmon_status",
                                               "ceph_cluster_check",
@@ -38,10 +42,10 @@ class CloudSanityBaseSpecification extends CvimRestApiSpecification {
 
     static List<String> management_test_names = ["disk_maintenance_vd_health",
                                                  "disk_maintenance_raid_health",
-                                                 "container_version_check"]
+                                                 "container_version_check",
+                                                 "percent_used_on_var_check"]
 
-
-    static List<String> valid_test_results = ["PASSED", "FAILED", "SKIPPED"]
+    static List<String> valid_test_results = ["PASSED", "FAILED", "SKIPPED", "WARNING"]
 
     def setupSpec() {
         deleteAllTestResults()
