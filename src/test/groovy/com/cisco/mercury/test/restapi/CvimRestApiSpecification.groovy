@@ -1,5 +1,6 @@
 package com.cisco.mercury.test.restapi
 
+import com.sun.javafx.runtime.SystemProperties
 import spock.lang.*
 import groovyx.net.http.*
 
@@ -21,11 +22,20 @@ class CvimRestApiSpecification extends Specification  {
 
     @Shared def client
 
+    static def username
+    static def password
+    static def port
+    static def ip_address
+
     def setupSpec() {
-        client = new RESTClient("https://172.29.87.100:8445/v1/")
+        username = System.getProperty("username") ?: "admin"
+        password = System.getProperty("password") ?: ""
+        port = System.getProperty("port") ?: "8445"
+        ip_address = System.getProperty("ip_address") ?: ""
+        client = new RESTClient("https://" + ip_address + ":" + port + "/v1/")
         client.handler.failure = client.handler.success
 
-        client.auth.basic('admin', 'a7766c144e758e72a6c1')
+        client.auth.basic(username, password)
         client.ignoreSSLIssues()
     }
 
