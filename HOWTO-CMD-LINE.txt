@@ -1,0 +1,33 @@
+Clone the repo
+--------------
+
+
+
+Compile the source:
+------------------
+
+$ cvim-test> ./gradlew compileTestGroovy
+  :compileJava NO-SOURCE
+  :compileGroovy NO-SOURCE
+  :processResources NO-SOURCE
+  :classes UP-TO-DATE
+  :compileTestJava NO-SOURCE
+  :compileTestGroovy
+
+  BUILD SUCCESSFUL
+
+  Total time: 3.315 secs
+
+
+Run a test target:
+------------------
+
+./gradlew test --tests *diskmgmt.DiskMgmtCheckDisksSpec -Pusername="<your-username" -Ppassword="<rest-api-pw>" -Pip_address="<rest-api-ip>" -Pport="<rest-api-port>"
+
+
+Report location:
+----------------
+
+file:///home/<your-user-id>/ws-cvim-test/cvim-test/build/reports/tests/test/index.html
+
+
