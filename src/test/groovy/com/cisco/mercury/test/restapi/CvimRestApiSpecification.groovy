@@ -1,6 +1,8 @@
 package com.cisco.mercury.test.restapi
 
 import com.sun.javafx.runtime.SystemProperties
+import groovy.json.JsonSlurper
+import groovy.json.internal.LazyMap
 import spock.lang.*
 import groovyx.net.http.*
 
@@ -43,4 +45,35 @@ class CvimRestApiSpecification extends Specification  {
 
     }
 
+    def getNodes(String type='all') {
+        def nodes_resp = client.get(path: 'nodes',
+                requestContentType: ContentType.TEXT,
+                headers: ['Content-Type': "application/json"])
+
+        if(nodes_resp.status == OK) {
+            def jsonSlurper = new JsonSlurper()
+            def nodes = nodes_resp.responseData['nodes']
+            if( type == "all") {
+                return nodes
+            } else {
+                ArrayList target_nodes = new ArrayList()
+                nodes.each { node ->
+                    if( node.mtype.contains(type)) {
+                        target_nodes.push(node)
+                    }
+                }
+                return target_nodes
+            }
+        }
+        return nodes_resp
+    }
+
+    List getNodeNames(String type="all") {
+        List node_names = []
+        def nodes = getNodes(type)
+        nodes.each { node ->
+            node_names.add((String)node.name)
+        }
+        return node_names
+    }
 }
