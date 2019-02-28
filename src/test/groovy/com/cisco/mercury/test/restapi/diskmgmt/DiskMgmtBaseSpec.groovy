@@ -32,7 +32,7 @@ class DiskMgmtBaseSpec extends CvimRestApiSpecification {
         return json_slurper.parseText(json_str)
     }
 
-    def createCheckDisks(String role) {
+    def createCheckDisks(String role, String servers="") {
         def resp = client.post(path: 'diskmgmt/check_disks/',
                 requestContentType: ContentType.JSON,
                 headers: ['Content-Type': "application/json; charset=UTF-8"],
@@ -42,7 +42,7 @@ class DiskMgmtBaseSpec extends CvimRestApiSpecification {
                                 'role': role,
                                 'locator': 'false',
                                 'json_display': 'false',
-                                'servers': '',
+                                'servers': servers,
                                 'uuid': '']])
         return resp
     }
