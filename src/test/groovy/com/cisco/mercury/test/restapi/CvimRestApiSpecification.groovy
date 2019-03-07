@@ -27,6 +27,7 @@ class CvimRestApiSpecification extends Specification  {
     static def port
     static def ip_address
     static def pod_type
+    static def pod_series
 
     def setupSpec() {
         username = System.getProperty("username") ?: "admin"
@@ -34,6 +35,7 @@ class CvimRestApiSpecification extends Specification  {
         port = System.getProperty("port") ?: "8445"
         ip_address = System.getProperty("ip_address") ?: "172.29.87.100"
         pod_type = System.getProperty("pod_type") ?: "fullon"
+        pod_series = System.getProperty("pod_series") ?: "C-Series"
         client = new RESTClient("https://" + ip_address + ":" + port + "/v1/")
         client.handler.failure = client.handler.success
 

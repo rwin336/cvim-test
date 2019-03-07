@@ -53,6 +53,9 @@ class CloudSanityBaseSpecification extends CvimRestApiSpecification {
             control_tests['ping_all_cephosd_nodes'] = 'PASSED'
             control_tests['ping_all_controller_nodes'] = 'SKIPPED'
         }
+        if( pod_series == "B-Series") {
+            cephosd_tests['osd_overall_status'] = 'SKIPPED'
+        }
     }
 
     def getCloudSanityRequest( response ) {
