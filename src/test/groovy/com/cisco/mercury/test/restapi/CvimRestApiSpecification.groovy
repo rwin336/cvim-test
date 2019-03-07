@@ -21,19 +21,19 @@ class CvimRestApiSpecification extends Specification  {
     static SERVICE_UNAVAILABLE = 503
     static GATEWAY_TIMEOUT = 504
 
-
     @Shared def client
-
     static def username
     static def password
     static def port
     static def ip_address
+    static def pod_type
 
     def setupSpec() {
         username = System.getProperty("username") ?: "admin"
-        password = System.getProperty("password") ?: ""
+        password = System.getProperty("password") ?: "836a277d8cc26ae85717"
         port = System.getProperty("port") ?: "8445"
-        ip_address = System.getProperty("ip_address") ?: ""
+        ip_address = System.getProperty("ip_address") ?: "172.29.87.100"
+        pod_type = System.getProperty("pod_type") ?: "fullon"
         client = new RESTClient("https://" + ip_address + ":" + port + "/v1/")
         client.handler.failure = client.handler.success
 

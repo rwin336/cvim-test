@@ -79,11 +79,12 @@ class CloudSanityComputeSpecification extends CloudSanityBaseSpecification {
         def test_result = test_detail.message.results
         def compute_results = test_result.compute
 
-        assert compute_results.size() == compute_test_names.size()
+        assert compute_results.size() == compute_tests.size()
 
-        compute_results.each { test, result ->
-            assert compute_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        compute_results.each { String test, String result ->
+            assert compute_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert compute_tests[test] == result
         }
 
         then: "The results can be deleted"
@@ -171,11 +172,12 @@ class CloudSanityComputeSpecification extends CloudSanityBaseSpecification {
         def test_result = test_detail.message.results
         def compute_results = test_result.compute
 
-        assert compute_results.size() == compute_test_names.size()
+        assert compute_results.size() == compute_tests.size()
 
-        compute_results.each { test, result ->
-            assert compute_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        compute_results.each { String test, String result ->
+            assert compute_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert compute_tests[test] == result
         }
     }
 }

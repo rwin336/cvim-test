@@ -7,7 +7,6 @@ import spock.lang.Shared
 class CloudSanityCephMonSpecification extends CloudSanityBaseSpecification {
 
     @Shared String test_uuid = null
-
     def setup() {}
 
     def cleanup() {
@@ -79,11 +78,12 @@ class CloudSanityCephMonSpecification extends CloudSanityBaseSpecification {
         def test_result = test_detail.message.results
         def cephmon_results = test_result.cephmon
 
-        assert cephmon_results.size() == cephmon_test_names.size()
+        assert cephmon_results.size() == cephmon_tests.size()
 
-        cephmon_results.each { test, result ->
-            assert cephmon_test_names.contains((String)test)
+        cephmon_results.each { String test, String result ->
+            assert cephmon_tests.keySet().contains((String)test)
             assert valid_test_results.contains((String)result)
+            assert cephmon_tests[test] == result
         }
 
         then: "The results can be deleted"
@@ -172,11 +172,12 @@ class CloudSanityCephMonSpecification extends CloudSanityBaseSpecification {
         def test_result = test_detail.message.results
         def cephmon_results = test_result.cephmon
 
-        assert cephmon_results.size() == cephmon_test_names.size()
+        assert cephmon_results.size() == cephmon_tests.size()
 
-        cephmon_results.each { test, result ->
-            assert cephmon_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        cephmon_results.each { String test, String result ->
+            assert cephmon_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert cephmon_tests[test] == result
         }
     }
 }

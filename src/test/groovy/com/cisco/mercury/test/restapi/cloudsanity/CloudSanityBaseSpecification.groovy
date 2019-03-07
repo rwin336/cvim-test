@@ -10,45 +10,49 @@ class CloudSanityBaseSpecification extends CvimRestApiSpecification {
                                      "COMPLETE": "cloudsanity_completed",
                                      "FAILED": "cloudsanity_failed"]
 
-    static List<String> control_test_names = ["ping_all_controller_nodes",
-                                              "check_rabbitmq_is_running",
-                                              "check_rabbitmq_cluster_status",
-                                              "check_rabbitmq_cluster_size",
-                                              "check_nova_service_list",
-                                              "container_version_check",
-                                              "ping_internal_vip",
-                                              "ping_all_cephosd_nodes",
-                                              "disk_maintenance_raid_health",
-                                              "check_mariadb_cluster_size",
-                                              "disk_maintenance_vd_health",
-                                              "percent_used_on_var_check"]
+    static Map<String, String> control_tests = ["ping_all_controller_nodes": "PASSED",
+                                                "check_rabbitmq_is_running": "PASSED",
+                                                "check_rabbitmq_cluster_status": "PASSED",
+                                                "check_rabbitmq_cluster_size": "PASSED",
+                                                "check_nova_service_list": "PASSED",
+                                                "container_version_check": "PASSED",
+                                                "ping_internal_vip": "PASSED",
+                                                "ping_all_cephosd_nodes": "SKIPPED",
+                                                "disk_maintenance_raid_health": "SKIPPED",
+                                                "check_mariadb_cluster_size": "PASSED",
+                                                "disk_maintenance_vd_health": "SKIPPED",
+                                                "percent_used_on_var_check": "PASSED"]
 
-    static List<String> compute_test_names = ["check_nova_hypervisor_list",
-                                              "disk_maintenance_raid_health",
-                                              "container_version_check",
-                                              "ping_all_compute_nodes",
-                                              "disk_maintenance_vd_health",
-                                              "percent_used_on_var_check"]
+    static Map<String, String>  compute_tests = ["check_nova_hypervisor_list": "PASSED",
+                                                 "disk_maintenance_raid_health": "SKIPPED",
+                                                 "container_version_check": "PASSED",
+                                                 "ping_all_compute_nodes": "PASSED",
+                                                 "disk_maintenance_vd_health": "SKIPPED",
+                                                 "percent_used_on_var_check": "PASSED"]
 
-    static List<String> cephmon_test_names = ["check_cephmon_status",
-                                              "ceph_cluster_check",
-                                              "check_cephmon_results",
-                                              "check_cephmon_is_running"]
+    static Map<String, String>  cephmon_tests = ["check_cephmon_status": "PASSED",
+                                                 "ceph_cluster_check": "PASSED",
+                                                 "check_cephmon_results": "PASSED",
+                                                 "check_cephmon_is_running": "PASSED"]
 
-    static List<String> cephosd_test_names = ["ping_all_storage_nodes",
-                                              "check_osd_result_without_osdinfo",
-                                              "osd_overall_status",
-                                              "check_osd_result_with_osdinfo"]
+    static Map<String, String>  cephosd_tests = ["ping_all_storage_nodes": "PASSED",
+                                                 "check_osd_result_without_osdinfo": "PASSED",
+                                                 "osd_overall_status": "PASSED",
+                                                 "check_osd_result_with_osdinfo": "PASSED"]
 
-    static List<String> management_test_names = ["disk_maintenance_vd_health",
-                                                 "disk_maintenance_raid_health",
-                                                 "container_version_check",
-                                                 "percent_used_on_var_check"]
+    static Map<String, String>  management_tests = ["disk_maintenance_vd_health": "SKIPPED",
+                                                    "disk_maintenance_raid_health": "SKIPPED",
+                                                    "container_version_check": "PASSED",
+                                                    "percent_used_on_var_check": "PASSED"]
 
     static List<String> valid_test_results = ["PASSED", "FAILED", "SKIPPED", "WARNING"]
 
     def setupSpec() {
         deleteAllTestResults()
+        if( pod_type == "ceph") {
+            control_tests['ping_all_cephosd_nodes'] = 'PASSED'
+            control_tests['ping_all_controller_nodes'] = 'SKIPPED'
+        }
     }
 
     def getCloudSanityRequest( response ) {

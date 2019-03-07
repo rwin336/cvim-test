@@ -79,11 +79,12 @@ class CloudSanityControlSpecification extends CloudSanityBaseSpecification  {
         def test_result = test_detail.message.results
         def control_results = test_result.control
 
-        assert control_results.size() == control_test_names.size()
+        assert control_results.size() == control_tests.size()
 
-        control_results.each { test, result ->
-            assert control_test_names.contains((String)test)
+        control_results.each { String test, String result ->
+            assert control_tests.keySet().contains((String)test)
             assert valid_test_results.contains((String)result)
+            assert control_tests[test] == result
         }
 
         then: "The results can be deleted"
@@ -151,7 +152,6 @@ class CloudSanityControlSpecification extends CloudSanityBaseSpecification  {
                 headers: ['Content-Type': "application/json"],
                 query: ['uuid': test_uuid ])
 
-
         then: "The delete request is rejected"
         assert del_resp.status == CONFLICT
 
@@ -181,11 +181,12 @@ class CloudSanityControlSpecification extends CloudSanityBaseSpecification  {
         def test_result = test_detail.message.results
         def control_results = test_result.control
 
-        assert control_results.size() == control_test_names.size()
+        assert control_results.size() == control_tests.size()
 
-        control_results.each { test, result ->
-            assert control_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        control_results.each { String test, String result ->
+            assert control_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert control_tests[test] == result
         }
 
         then: "The results can be deleted"

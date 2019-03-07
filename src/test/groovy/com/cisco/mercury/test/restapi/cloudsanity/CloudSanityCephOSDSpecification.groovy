@@ -79,11 +79,12 @@ class CloudSanityCephOSDSpecification extends CloudSanityBaseSpecification {
         def test_result = test_detail.message.results
         def cephosd_results = test_result.cephosd
 
-        assert cephosd_results.size() == cephosd_test_names.size()
+        assert cephosd_results.size() == cephosd_tests.size()
 
-        cephosd_results.each { test, result ->
-            assert cephosd_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        cephosd_results.each { String test, String result ->
+            assert cephosd_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert cephosd_tests[test] == result
         }
 
         then: "The results can be deleted"
@@ -172,11 +173,12 @@ class CloudSanityCephOSDSpecification extends CloudSanityBaseSpecification {
         def test_result = test_detail.message.results
         def cephosd_results = test_result.cephosd
 
-        assert cephosd_results.size() == cephosd_test_names.size()
+        assert cephosd_results.size() == cephosd_tests.size()
 
-        cephosd_results.each { test, result ->
-            assert cephosd_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        cephosd_results.each { String test, String result ->
+            assert cephosd_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert cephosd_tests[test] == result
         }
     }
 }

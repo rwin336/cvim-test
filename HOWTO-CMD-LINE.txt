@@ -34,7 +34,8 @@ Run a test target:
 ------------------
 
 ./gradlew test --rerun-tasks --tests *diskmgmt.DiskMgmtCheckDisksSpec -Pusername="<your-username" -Ppassword="<rest-api-pw>" -Pip_address="<rest-api-ip>" -Pport="<rest-api-port>"
-
+./gradlew test --rerun-tasks --tests *cloudsanity.CloudSanityAllSpecification -Ppassword="<rest-api-pw>" -Pip_address="<rest-api-ip>"
+./gradlew test --rerun-tasks --tests *cloudsanity.CloudSanityAllSpecification -Ppassword="<rest-api-pw>" -Pip_address="<rest-api-ip>" -Ppod_type="ceph"
 
 Report location:
 ----------------

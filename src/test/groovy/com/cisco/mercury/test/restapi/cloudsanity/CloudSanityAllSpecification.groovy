@@ -83,34 +83,39 @@ class CloudSanityAllSpecification extends CloudSanityBaseSpecification {
         def cephmon_results = test_result.cephmon
         def cephosd_results = test_result.cephosd
 
-        assert control_results.size() == control_test_names.size()
-        control_results.each { test, result ->
-            assert control_test_names.contains((String)test)
+        assert control_results.size() == control_tests.size()
+        control_results.each { String test, String result ->
+            assert control_tests.keySet().contains(test)
             assert valid_test_results.contains((String)result)
+            assert control_tests[test] == result
         }
 
-        assert compute_results.size() == compute_test_names.size()
-        compute_results.each { test, result ->
-            assert compute_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert compute_results.size() == compute_tests.size()
+        compute_results.each { String test, String result ->
+            assert compute_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert compute_tests[test] == result
         }
 
-        assert management_results.size() == management_test_names.size()
-        management_results.each { test, result ->
-            assert management_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert management_results.size() == management_tests.size()
+        management_results.each { String test, String result ->
+            assert management_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert management_tests[test] == result
         }
 
-        assert cephosd_results.size() == cephosd_test_names.size()
-        cephosd_results.each { test, result ->
-            assert cephosd_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert cephosd_results.size() == cephosd_tests.size()
+        cephosd_results.each { String test, String result ->
+            assert cephosd_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert cephosd_tests[test] == result
         }
 
-        assert cephmon_results.size() == cephmon_test_names.size()
-        cephmon_results.each { test, result ->
-            assert cephmon_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert cephmon_results.size() == cephmon_tests.size()
+        cephmon_results.each { String test, String result ->
+            assert cephmon_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert cephmon_tests[test] == result
         }
 
         then: "The results can be deleted"
@@ -203,34 +208,39 @@ class CloudSanityAllSpecification extends CloudSanityBaseSpecification {
         def cephmon_results = test_result.cephmon
         def cephosd_results = test_result.cephosd
 
-        assert control_results.size() == control_test_names.size()
-        control_results.each { test, result ->
-            assert control_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert control_results.size() == control_tests.size()
+        control_results.each { String test, String result ->
+            assert control_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert control_tests[test] == result
         }
 
-        assert compute_results.size() == compute_test_names.size()
-        compute_results.each { test, result ->
-            assert compute_test_names.contains((String)test)
+        assert compute_results.size() == compute_tests.size()
+        compute_results.each { String test, String result ->
+            assert compute_tests.keySet().contains((String)test)
             assert valid_test_results.contains((String)result)
+            assert compute_tests[test] == result
         }
 
-        assert management_results.size() == management_test_names.size()
-        management_results.each { test, result ->
-            assert management_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert management_results.size() == management_tests.size()
+        management_results.each { String test, String result ->
+            assert management_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert management_tests[test] == result
         }
 
-        assert cephosd_results.size() == cephosd_test_names.size()
-        cephosd_results.each { test, result ->
-            assert cephosd_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert cephosd_results.size() == cephosd_tests.size()
+        cephosd_results.each { String test, String result ->
+            assert cephosd_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert cephosd_tests[test] == result
         }
 
-        assert cephmon_results.size() == cephmon_test_names.size()
-        cephmon_results.each { test, result ->
-            assert cephmon_test_names.contains((String)test)
-            assert valid_test_results.contains((String)result)
+        assert cephmon_results.size() == cephmon_tests.size()
+        cephmon_results.each { String test, String result ->
+            assert cephmon_tests.keySet().contains(test)
+            assert valid_test_results.contains(result)
+            assert cephmon_tests[test] == result
         }
 
     }
