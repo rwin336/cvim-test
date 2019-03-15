@@ -83,7 +83,7 @@ class CvimRestApiSpecification extends Specification  {
 
         def ui_config = jsonSlurper.parseText(ui_config_resp.responseData["testinfo_result"])
 
-        client = new RESTClient("https://" + ui_config['RestAPI-Url'] + "/v1/")
+        client = new RESTClient( ui_config['RestAPI-Url'] + "/v1/")
         client.handler.failure = client.handler.success
         client.auth.basic(ui_config['RestAPI-Username'], ui_config['RestAPI-Password'])
         client.ignoreSSLIssues()
